@@ -5,14 +5,13 @@ import openai
 openai.api_key = "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"
 
 def resposta_generica(pergunta):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # ou outro modelo se necessário
-        messages=[
-            {"role": "system", "content": "Você é um assistente útil."},
-            {"role": "user", "content": pergunta}
-        ]
+    response = openai.Completion.create(
+        model="gpt-3.5-turbo",  # Ou outro modelo de sua escolha
+        prompt=pergunta,  # Aqui você coloca a pergunta diretamente como um prompt
+        max_tokens=150  # Limite de tokens na resposta, ajuste conforme necessário
     )
-    return response['choices'][0]['message']['content']
+    return response.choices[0].text.strip()  # Pega a resposta e limpa espaços extras
+
 
 
 # Função para obter resposta personalizada
