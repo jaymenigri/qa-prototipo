@@ -1,18 +1,19 @@
 import streamlit as st
+
 import openai
 
-# Configuração da chave da API
 openai.api_key = "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"
 
-# Função para obter resposta genérica
 def resposta_generica(pergunta):
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo",  # ou outro modelo se necessário
         messages=[
+            {"role": "system", "content": "Você é um assistente útil."},
             {"role": "user", "content": pergunta}
         ]
     )
     return response['choices'][0]['message']['content']
+
 
 # Função para obter resposta personalizada
 def resposta_personalizada(pergunta):
